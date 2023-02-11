@@ -1,11 +1,12 @@
 import './assets/style/App.scss';
+import { useState } from 'react';
 
 function App() {
-  let name = 'mario'
+  const [name, setName] = useState('mario')
 
   const handleClick = () => {
-    name = 'luigi'
-    console.log(name)
+    setName(name === 'mario' ? 'luigi': 'mario')
+    console.log(name) // This will log the previous state
   }
 
   return (
