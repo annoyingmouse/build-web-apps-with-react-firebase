@@ -19,17 +19,25 @@ function App() {
   const handleClick = id => setEvents((prevEvents) => prevEvents.filter(event => event.id !== id))
 
   return (
-    <div className="App">
+    <div className="app">
       <h2>Upcoming events</h2>
       <div>
-        <button type="button"
-                onClick={() => setShowEvents(false)}>Hide events</button>
+      <button type="button"
+                onClick={() => setShowEvents(!showEvents)}>{showEvents ? 'Hide' : 'Show'} events</button>
       </div>
-      <div>
-        <button type="button"
-                onClick={() => setShowEvents(true)}>Show events</button>
-      </div>
-      {events.map((event, index) => (
+      {showEvents && (
+        <div>
+          <button type="button"
+                  onClick={() => setShowEvents(false)}>Hide events</button>
+        </div>
+      )}
+      {!showEvents && (
+        <div>
+          <button type="button"
+                  onClick={() => setShowEvents(true)}>Show events</button>
+        </div>
+      )}
+      {showEvents && events.map((event, index) => (
         <div key={event.id}>
           <h3>{index} - {event.title}</h3>
           <button onClick={() => handleClick(event.id)}>Delete event</button>
