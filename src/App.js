@@ -2,7 +2,6 @@ import './assets/style/App.scss';
 import { useState } from 'react';
 
 function App() {
-  const [name, setName] = useState('mario')
   const [events, setEvents] = useState([
     {
       title: "Mario's birthday bash",
@@ -16,18 +15,15 @@ function App() {
     }
   ])
 
-  const handleClick = () => {
-    setName(name === 'mario' ? 'luigi': 'mario')
-  }
+  const handleClick = id => setEvents((prevEvents) => prevEvents.filter(event => event.id !== id))
 
   return (
     <div className="App">
-      <h1>My name is {name}</h1>
-      <button onClick={handleClick}>Change name</button>
       <h2>Upcoming events</h2>
       {events.map((event, index) => (
         <div key={event.id}>
-          <h3>{index + 1} - {event.title}</h3>
+          <h3>{index} - {event.title}</h3>
+          <button onClick={() => handleClick(event.id)}>Delete event</button>
         </div>
       ))}
     </div>  
