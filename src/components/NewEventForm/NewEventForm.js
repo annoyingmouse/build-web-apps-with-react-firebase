@@ -1,20 +1,23 @@
 import styles from './NewEventForm.module.scss'
-import { useRef } from 'react'
+import { useState } from 'react'
 
 export const NewEventForm = ({ addEvent }) => {
-  const title = useRef()
-  const date = useRef()
+  const [title, setTitle] = useState('')
+  const [date, setDate] = useState('')
+  const [location, setLocation] = useState('huddersfield')
 
   const resetForm = () => {
-    title.current.value = ''
-    date.current.value = ''
+    setTitle('')
+    setDate('')
+    setLocation('huddersfield')
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    const event = {
-      title: title.current.value,
-      date: date.current.value,
+    const event = { 
+      title,
+      date,
+      location,
       id: Math.floor(Math.random() * 10000) + 1
     }
     addEvent(event)
@@ -27,12 +30,23 @@ export const NewEventForm = ({ addEvent }) => {
       <label>
         <span>Event Title:</span>
         <input type="text"
-               ref={title}/>
+               value={title}
+               onChange={e => setTitle(e.target.value)}/>
       </label>
       <label>
         <span>Event Date:</span>
         <input type="date"
-               ref={date}/>
+               value={date}
+               onChange={e => setDate(e.target.value)}/>
+      </label>
+      <label>
+        <span>Event Location:</span>
+        <select value={location}
+                onChange={e => setLocation(e.target.value)}>
+          <option value="huddersfield">Huddersfield</option>
+          <option value="cambridge">Cambridge</option>
+          <option value="ely">Ely</option>
+        </select>
       </label>
       <button type="submit">
         Submit
