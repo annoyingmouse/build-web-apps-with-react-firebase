@@ -1,5 +1,5 @@
 import './assets/style/App.scss';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Title from './components/Title/Title';
 import Modal from './components/Modal/Modal';
 import EventList from './components/EventList/EventList';
@@ -24,8 +24,6 @@ function App() {
 
   const handleClose = () => setShowModal(false)
 
-  const handleOpen = () => setShowModal(true)
-
   const subtitle = "All the latest events in Mario Kingdom"
 
   return (
@@ -33,8 +31,6 @@ function App() {
       <Title title="Events in your area"
              subtitle={subtitle}/>
       <div>
-        {/* <button type="button"
-                onClick={handleOpen}>Open Modal</button> */}
         <button type="button"
                 onClick={() => setShowModal(true)}>Open Modal</button>
       </div>
@@ -42,20 +38,8 @@ function App() {
         <button type="button"
                 onClick={() => setShowEvents(!showEvents)}>{showEvents ? 'Hide' : 'Show'} events</button>
       </div>
-      {showEvents && (
-        <div>
-          <button type="button"
-                  onClick={() => setShowEvents(false)}>Hide events</button>
-        </div>
-      )}
-      {!showEvents && (
-        <div>
-          <button type="button"
-                  onClick={() => setShowEvents(true)}>Show events</button>
-        </div>
-      )}
-      {showEvents && <EventList events={events}
-                                handleClick={handleClick}/>}
+      {showEvents && (<EventList events={events}
+                                 handleClick={handleClick}/>)}
       {showModal && (<Modal handleClose={handleClose}>
         <h2>10% Off Coupon Code!!</h2>
         <p>Use the code NINJA10 at the checkout</p>
