@@ -1,8 +1,9 @@
 import './assets/style/App.scss';
 import { useState } from 'react';
-import Title from './components/Title/Title';
-import Modal from './components/Modal/Modal';
-import EventList from './components/EventList/EventList';
+import { Title } from './components/Title/Title';
+import { Modal } from './components/Modal/Modal';
+import { EventList } from './components/EventList/EventList';
+import { NewEventForm } from './components/NewEventForm/NewEventForm';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -32,10 +33,6 @@ function App() {
              subtitle={subtitle}/>
       <div>
         <button type="button"
-                onClick={() => setShowModal(true)}>Open Modal</button>
-      </div>
-      <div>
-        <button type="button"
                 onClick={() => setShowEvents(!showEvents)}>{showEvents ? 'Hide' : 'Show'} events</button>
       </div>
       {showEvents && (<EventList events={events}
@@ -43,11 +40,13 @@ function App() {
       {showModal && (
         <Modal handleClose={handleClose}
                isSalesModal={true}>
-          <h2>10% Off Coupon Code!!</h2>
-          <p>Use the code NINJA10 at the checkout</p>
+          <NewEventForm/>
         </Modal>
       )}
-      
+      <div>
+        <button type="button"
+                onClick={() => setShowModal(true)}>Add New Event</button>
+      </div>
     </div>  
   );
 }
