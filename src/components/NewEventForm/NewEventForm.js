@@ -1,7 +1,7 @@
 import styles from './NewEventForm.module.scss'
 import { useState } from 'react'
 
-export const NewEventForm = () => {
+export const NewEventForm = ({ addEvent }) => {
   const [title, setTitle] = useState('')
   const [date, setDate] = useState('')
 
@@ -10,8 +10,20 @@ export const NewEventForm = () => {
     setDate('')
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    const event = { 
+      title,
+      date,
+      id: Math.floor(Math.random() * 10000) + 1
+    }
+    addEvent(event)
+    resetForm()
+  }
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form}
+          onSubmit={handleSubmit}>
       <label>
         <span>Event Title:</span>
         <input type="text"
@@ -27,8 +39,6 @@ export const NewEventForm = () => {
       <button type="submit">
         Submit
       </button>
-      <p>title - {title}, date - {date}</p>
-      <p onClick={resetForm}>Reset the form</p>
     </form>
   )
 }
