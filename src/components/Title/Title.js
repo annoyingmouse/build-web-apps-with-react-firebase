@@ -2,10 +2,10 @@ import './Title.scss'
 
 export default function Title({title, subtitle}) {
   return (
-    <>
-        <h1 className="title">{title}</h1>
+    <div className="title-block">
+        <h1>{title}</h1>
         <br/>
-        <h2 className="subtitle">{subtitle}</h2>
-    </>
+        <h2>{subtitle}</h2>
+    </div>
   );
 }
